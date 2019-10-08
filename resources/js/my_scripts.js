@@ -141,28 +141,24 @@ function loadStatsPage(){
 					  avg_r_yards   - the average number of rushing yards for the player's Buff career
 					  avg_rec_yards - the average number of receiving yards for the player's Buff career
 */
-players = [
-	{name:'John Doe', year:'Freshman',major:'Psychology', games_played:'2', passing_yards:'100', rushing_yards:'69', recieving_yards:'420'},
-	{name:'Joe Smith', year:'Sophmore',major:'Computer Science', games_played:'1', passing_yards:'2', rushing_yards:'4', recieving_yards:'8'},
-	{name:'Jim Clark', year:'Junior',major:'Math', games_played:'10', passing_yards:'9000', rushing_yards:'69', recieving_yards:'420'},
-	{name:'Jack Mo', year:'Super Senior', major:'Sociology', games_played:'12', passing_yards:'-1', rushing_yards:'69', recieving_yards:'420'}
-]
 
 function switchPlayers(playerNum){
 	player = players[playerNum]
 	console.log(player)
+
+	document.getElementById('player_img').src = player.img
+	document.getElementById('player_img').alt = player.alt
 	document.getElementById('p_year').innerHTML = player.year
 	document.getElementById('p_major').innerHTML = player.major
 	document.getElementById('g_played').innerHTML = player.games_played
-	document.getElementById('p_yards').innerHTML = player.passing_yards
+	document.getElementById('p_yards').innerHTML = player.pass_yards
 	document.getElementById('r_yards').innerHTML = player.rushing_yards
-	document.getElementById('rec_yards').innerHTML = player.recieving_yards
-	document.getElementById('avg_p_yards').innerHTML = player.passing_yards/player.games_played
+	document.getElementById('rec_yards').innerHTML = player.receiving_yards
+	document.getElementById('avg_p_yards').innerHTML = player.pass_yards/player.games_played
 	document.getElementById('avg_r_yards').innerHTML = player.rushing_yards/player.games_played
-	document.getElementById('avg_rec_yards').innerHTML = player.recieving_yards/player.games_played
+	document.getElementById('avg_rec_yards').innerHTML = player.receiving_yards/player.games_played
 
-	document.getElementById('player_img').src = '../resources/img/player'+(playerNum+1)+'.jpg'
-	document.getElementById('player_img').alt = 'Player ' + (playerNum+1)+' profile picture'
+
 }
 
 function loadPlayersPage(){
