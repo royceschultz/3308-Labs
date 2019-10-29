@@ -1,0 +1,78 @@
+Royce Schultz
+
+CREATING UNIVERSITY TABLE:
+
+create table if not exists universities(
+    name text primary key,
+    date_established date,
+    adress varchar(255),
+    student_population int,
+    acceptance_rate decimal(9, 9)
+);
+
+insert into universities(name, date_established, adress,student_population, acceptance_rate)
+values('CU Boulder','1876-01-01','1100 28th St, Boulder, CO 80303',35000,.8);
+
+QUERY BASICS:
+
+\c football_db
+--1
+select name, major
+from football_players;
+
+--2
+select name, rushing_yards
+from football_players
+where rushing_yards > 70;
+
+--3
+select * from football_games
+where visitor_name like 'Nebraska';
+
+--4
+select * from football_games
+where home_score > visitor_score;
+
+--5
+select visitor_name, game_date from football_games;
+
+--6
+select avg(home_score) from football_games;
+
+--7
+select major,count(major) from football_players
+group by major;
+
+--8
+select major,count(major) from football_players
+where major like 'CSCI'
+group by major;
+
+VIEWS:
+\c football_db
+--1
+create view games_won as
+select count(*) from football_games
+where home_score > visitor_score;
+
+--2
+create view games_played as
+select count(*) from football_games;
+
+--3
+select cast ((select * from games_won) as float) / (select * from games_played);
+
+JOINS:
+
+\c football_db
+--1
+select count(*) from football_games
+inner join football_players on
+football_players.id=ANY(football_games.players)
+where football_players.name ='Cedric Vega';
+
+--2
+select avg(rushing_yards) from football_games
+inner join football_players on
+football_players.id=ANY(football_games.players)
+where football_players.name ='Cedric Vega';
